@@ -1,0 +1,148 @@
+Fivos Kavassalis
+HW3
+Written Questions
+
+<< Use this file for providing your written answers to the question. >>
+
+1.
+
+a) This sequence can occur if we put the input: 9 8 - 7 - 6 - 5 - 4 - 3 - 2 1 0 - - - -
+
+b) This sequence cannot occur because we cannot push 9 before 8 in this case, since 
+   8 will be popped first (in order to sustain the sequence the other numbers must have).
+   
+c) This sequence can occur if we put the input: 9 8 7 - 6 5 4 - 3 - 2 - - 1 - 0 - - - -
+
+d) This sequence can occur if we put the input: 9 8 7 6 5 - - - - - 4 3 2 1 0 - - - - -
+
+e) This sequence can occur if we put the input: 9 8 7 6 5 - - - - - 4 - 3 - 2 - 1 - 0 - 
+
+f) This sequence cannot occur because we cannot push 8 before 7 in this case, since 
+   7 will be popped first (in order to sustain the sequence the other numbers must have). 
+
+g) This sequence cannot occur because we cannot push 9 before 7 in this case, since 
+   7 will be popped first (in order to sustain the sequence the other numbers must have).
+   
+h) This sequence can occur if we put the input: 9 8 7 - - 6 5 - - 4  3 - - 2 1 - - 0 - - 
+
+
+
+2. (Answer on whether results support proposition is below -- After the proof)
+Proof: It is enough to prove that sink-based heap construction uses fewer than n exchanges because the number of compares is at most two times the number of exchanges.
+Let's assume that the binary heap is perfect (i.e., a binary tree in which every level is completely filled) and has height h.
+
+                        4
+           3                         3
+      2           2             2            2
+  1     1     1       1     1      1       1    1
+ 0 0   0 0   0 0     0 0   0 0    0 0     0 0  0 0
+
+The values are the height of the subtrees rooted in each node.
+
+We define the height of a node in a tree to be the height of the subtree rooted at that node. A key at height k can be exchanged with at most k keys beneath it when it is sunk down.
+Since there are 2^(h-k) nodes at height k, the total number of exchanges is at most:
+h + 2(h - 1) + 4(h - 2) + 8(h - 3) + ... + 2^h(0) = 2^(h+1) - h - 2
+= N - (h - 1) <= N
+
+The first equality is for a nonstandard sum, but it is straightforward to verify that the formula holds via mathematical induction. The second equality holds because a perfect binary tree of height h has 2^(h+1) - 1 nodes.
+
+When the binary tree is not perfect, the result still holds by using the same analysis and considering the fact that the number of nodes at height k in a binary heap on n nodes is at most ceil(n / 2^(k+1)).
+
+ANSWER ON WHETHER MY RESULTS SUPPORT THE PROPOSITION:
+The empirical results that I got, support this proposition since the max number of comparisons of all
+the trials (10) for each N (Number of Elements) in the heaps that were randomly created, is less that 2N and 
+the max number of exchanges is less than N. 
+
+Q3.
+		
+a. SELECTION SORT
+
+C(N) = (N - 1) + C(N - 1) = 
+	 = (N - 1) + ([(N - 1) - 1] + C((N - 1) - 1)) = 
+	 = (N - 1) + (N - 2) + C(N - 2) =
+	 = (N - 1) + (N - 2) + (N - 3) + C(N - 3) 
+	 
+	 Therefore, we get:
+	 C(N) = (N - 1) + (N - 2) + (N - 3) + C(N - 3) =
+	      = . . . =
+	      = C(N - k) + k*N - k - (k - 1) - ... - 1 =
+	      
+	      So how many times do we have to increase k?
+	      For k = N - 1, we get C(1) = 0 because for selection
+	      sort, if it is one element, you do not do any comparisons and 
+	      our value is sorted (Since it is by itself). Therefore,
+	      
+	      C(N) = (N - 1)*N - ((N - 1) + (N - 2) ... + 1) =
+	           = (N - 1)*N - ((N - 1)*N)/2 =
+	           = ((N - 1)*N)/2
+
+	           Upper and Lower bound are the same in this case.
+	           
+	        
+	        
+	       
+
+b. BINARY ARRAY SEARCH
+
+	For upper bound: 
+	C(N) = C(N/2) + 1 
+	
+	C(N) = C(N/2) + 1 =
+	     = (C(N/4) + 1) + 1 =
+	     = ((C(N/8) + 1) + 1) + 1 =
+	     = C(N/8) + 3 =
+	     = C(N/(2^k)) + k
+
+	How many times can you increase k?
+	For k= log(N), C(1) = 1 because for 1 element you 
+	only compare once in binary array search. Therefore,
+	
+	C(N) = 1 + log(N), for upper bound. 
+	
+	For lower bound: C(N) = 1, since in Binary Array Search, the best case is 
+	when you find mid the first time you make the comparison.
+	
+	
+
+	
+c. MERGE SORT
+
+	For upper bound:
+	C(N) = 2*C(N/2) + N 
+	
+	So,
+	C(N) = 2*C(N/2) + N =
+	       = 2*(2*C(N/4) + N/2) + N =
+	       = 2*(2*(2*C(N/8) + N/4) + N/2) + N =
+	       = 8*C(N/8) + 3 * N =
+	       = 2^k * C(N/(2^k)) + k * N        
+	       Therefore,
+	       C(N) = 2^k * C(N/(2^k)) + k*N
+	       
+	       How many times can you increase k?
+	       For k=log(N), C(1) = 0 since in merge sort we do not
+	       make any comparisons for a single element. Thus,
+	       
+	       C(N) = N*log(N) 
+	       
+	For lower bound: 
+	C(N) = 2*C(N/2) + N/2
+	
+	So,
+	C(N) = 2*C(N/2) + N/2 =
+	       = 2*(2*C(N/4) + N/4) + N/2 =
+	       = 2*(2*(2*C(N/8) + N/8) + N/4) + N/2 =
+	       = 8*C(N/8) + 3 * N/2 =
+	       = 2^k * C(N/(2^k)) + k * (N/2)        
+	       Therefore,
+	       C(N) = 2^k * C(N/(2^k)) + k*(N/2)
+	       
+	       How many times can you increase k?
+	       For k=log(N), C(1) = 0 since in merge sort we do not
+	       make any comparisons for a single element. Thus,
+	       
+	       C(N) = (N/2)*log(N) 
+	
+	          
+
+	  

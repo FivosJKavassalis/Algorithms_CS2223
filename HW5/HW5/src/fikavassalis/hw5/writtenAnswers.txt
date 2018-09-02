@@ -1,0 +1,41 @@
+<<Fivos Kavassalis>>
+HW5
+Written Questions
+
+
+2 -> (b)
+Breaking Counting sort down to it's prime components as n = (size of the array) and k = (max element in the array).
+We can see that in its first loop,  we observe the input data by an order of n to see all the values.
+Then, we initialize the count array, by iterating through a for loop k+1 times. On the third for loop we go through the 
+loop n times, since values.lebgth = n. Finally, in the nested for loop, we go through the loop in an order of n times.
+This is the case because the outer for loop iterates k times, but the inner loop iterates the number of times that each 
+number occurs. Therefore, it iterates n times. So the overall upper bound time of the Counting Sort is:
+
+O(n)+O(n)+O(k)+O(n) = O(n+k) 
+(We keep track of both due to the unknown if k is greater or larger than n).
+
+
+For the lower bound, it would be exactly the same since we do not have a conditional loop or 
+something of that sort (we know that index for loops will always run a specific number of times).
+Therefore, for Counting Sort we have Omega(n+k).
+
+So O(n+k) [upper bound] and Omega(n+k) [lower bound] result in Theta(n+k)
+
+3 -> (a)
+
+We already know the following facts: A graph with no vertices is also, by definition, considered
+to be connected and a graph with a single vertex is, by definition, connected. Note that there are
+no edges in such a graph
+
+For V >= 2:
+
+If we have a connected graph of V+1 vertices and we execute Depth First Search on it, every vertex 
+will eventually get marked (since graph is connected). Therefore, there must be a vertex, sv, that 
+will be marked last and will have at least one edge towards it (graph is connected). This means that
+the other V vertices were marked before sv, and not through a path that included sv since it was not
+marked yet (If you call DFS on a vertex, it gets marked and and it calls DFS on all of its adjacent 
+vertices [neighbors...]). Therefore, the subset of the initial graph that consists of V vertices 
+(wihout sv), instead of V+1, will have all of its vertices marked without the involvement of vertex sv.
+So this subset graph, will remain connected after the deletion of sv of the connected graph with V+1
+elements. So we conclude that there will always be at least one vertex in a connected graph, that if 
+this specific vertex is removed, the graph will still be connected.

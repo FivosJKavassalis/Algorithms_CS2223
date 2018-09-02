@@ -1,0 +1,25 @@
+<<Fivos Kavassalis>>
+HW2
+Written Questions
+
+<< Use this file for providing your written answers to the question. >>
+
+
+2.
+
+Hypothesis 1: 
+My results show that when there are a large number of duplicate values, the overall sorting time should be
+incremented. This can be easily detected, since the "Time Trials" results indicate that for a large N, the time
+ trials for MergeU, QuickU and QuickAU are smaller than the corresponding time trials for MergeD, QuickD, QuickAD.
+ Therefore, this hypothesis is false.
+ 
+ Hypothesis 2:
+ My results show that when there are a large number of duplicate values, the difference in the number of exchanges 
+is inconclusive. The "Exch Results" results do not indicate a concrete difference in the number of 
+exchanges for MergeU, QuickU and QuickAU with the corresponding number of exchanges for MergeD, QuickD, QuickAD.
+ Therefore, this hypothesis is inconclusive.
+ 
+4.1
+The worst case for the number of comparisons that are performed to find the minimum element in the Maximum Priority Queue is
+ logN * logN (N is the number of elements in the heap) because for [N = some power of 2 in a heap], we have to do [corresponding exponent * logN]
+ comparisons to reach the min value, since every time we compare in a heap we end up with one of the two branches (logN). 
